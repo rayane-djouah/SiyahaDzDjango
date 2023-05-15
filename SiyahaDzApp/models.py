@@ -62,6 +62,7 @@ class PointOfInterest(models.Model):
     longitude = models.FloatField()
     name = models.CharField(max_length=100)
     description = models.TextField()
+    views_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
