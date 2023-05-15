@@ -37,19 +37,10 @@ class City(models.Model):
         return self.name
     
 class Event(models.Model):
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
     date = models.DateField()
-
-    def __str__(self):
-        return self.name
-
-class Place(models.Model):
-    name = models.CharField(max_length=100)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
 
     def __str__(self):
         return self.name
@@ -60,13 +51,15 @@ class Comment(models.Model):
     comment = models.TextField()
 
     def __str__(self):
-        return f"{self.user.username} - {self.point_of_interest.name}"
+        return f"{self.tourist.username} - {self.point_of_interest.name}"
 
 
 class PointOfInterest(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     name = models.CharField(max_length=100)
     description = models.TextField()
 
