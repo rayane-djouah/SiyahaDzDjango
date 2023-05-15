@@ -1,0 +1,29 @@
+# Django-related files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# Dependency directories
+venv/
+env/
+node_modules/
+
+# IDE files
+.vscode/
+.idea/
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyi
+
+# Test coverage reports
+htmlcov/
+.coverage
+.coverage.*
