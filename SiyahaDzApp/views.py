@@ -5,14 +5,7 @@ from .permissions import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-
 # Region views
-@api_view(['GET'])
-def regions(request):
-    region = Region.objects.all()
-    serializer = RegionSerializer(region)
-    return Response(serializer.data)
-
 
 class RegionListAPIView(generics.ListAPIView):
     queryset = Region.objects.all()
