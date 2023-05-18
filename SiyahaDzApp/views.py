@@ -47,7 +47,7 @@ class RegionAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# RegionalEmployé views
+# RegionalEmployee views
 
 class RegionalEmployeeAPIView(APIView):
     def get(self, request, pk=None):
@@ -339,6 +339,47 @@ class TransportationAPIView(APIView):
 
 
 # PointOfInterest_TransportationAPIView
+class PointOfInterest_TransportationAPIView(APIView):
+    def get(self, request, pk=None):
+        if pk is not None:
+            point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
+            serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportation)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        point_of_interest_transportations = PointOfInterest_Transportation.objects.all()
+        serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        if not IsCentralEmployee().has_permission(request, self):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        serializer = PointOfInterest_TransportationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        if not IsCentralEmployee().has_permission(request, self):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
+        serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportation, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        if not IsCentralEmployee().has_permission(request, self):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
+        point_of_interest_transportation.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#CommentAPIView
 
 class CommentAPIView(APIView):
     def get(self, request, pk=None):
