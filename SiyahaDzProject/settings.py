@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    "SiyahaDzApp.apps.SiyahadzappConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -78,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ET_DB',
         'USER': 'root',
-        'PASSWORD': 'Rayane123##',
+        'PASSWORD': '090502',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

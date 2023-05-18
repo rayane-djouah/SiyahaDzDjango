@@ -1,6 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
+class Region(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+        
 class RegionalEmployee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
@@ -23,11 +30,7 @@ class Tourist(models.Model):
         return self.user.username
 
 
-class Region(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
 
 class City(models.Model):
     name = models.CharField(max_length=100)
@@ -45,13 +48,32 @@ class Event(models.Model):
     def __str__(self):
         return self.name
     
-class Comment(models.Model):
-    tourist = models.ForeignKey(Tourist, on_delete=models.CASCADE)
-    point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
-    comment = models.TextField()
+
+
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.tourist.username} - {self.point_of_interest.name}"
+        return self.name
+
+class Theme(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+
+class Transportation(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+     
+
+
+
 
 
 class PointOfInterest(models.Model):
@@ -67,20 +89,20 @@ class PointOfInterest(models.Model):
     def __str__(self):
         return self.name
 
-class Category(models.Model):
-    name = models.CharField(max_length=100)
+
+class Comment(models.Model):
+    tourist = models.ForeignKey(Tourist, on_delete=models.CASCADE)
+    point_of_interest = models.ForeignKey(
+        PointOfInterest, on_delete=models.CASCADE)
+    comment = models.TextField()
 
     def __str__(self):
-        return self.name
+        return f"{self.tourist.username} - {self.point_of_interest.name}"
 
-class Theme(models.Model):
-    name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.name
-    
 class OpeningHours(models.Model):
-    point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
+    point_of_interest = models.ForeignKey(
+        PointOfInterest, on_delete=models.CASCADE)
     day_of_week = models.CharField(max_length=20)
     opening_time = models.TimeField()
     closing_time = models.TimeField()
@@ -88,29 +110,26 @@ class OpeningHours(models.Model):
     def __str__(self):
         return f"{self.point_of_interest.name} - {self.day_of_week}"
 
-class Transportation(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-    
 class PointOfInterest_Transportation(models.Model):
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
     transportation = models.ForeignKey(Transportation, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.point_of_interest.name} - {transportation.name}"   
-
+        return f"{self.point_of_interest.name} - {transportation.name}"  
+    
+    
+    
 class Photo(models.Model):
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='storage/photos/')
 
     def __str__(self):
         return self.image.name
-
+    
 
 class Video(models.Model):
-    point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
+    point_of_interest = models.ForeignKey(
+        PointOfInterest, on_delete=models.CASCADE)
     video = models.FileField(upload_to='storage/videos/')
 
     def __str__(self):
