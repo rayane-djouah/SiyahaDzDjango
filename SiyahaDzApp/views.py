@@ -1,9 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.shortcuts import get_object_or_404
 from .models import *
 from .serializers import *
 from .permissions import *
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 
 # RegionAPIView
@@ -148,7 +152,11 @@ class CityAPIView(APIView):
 
         return queryset
 
-
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('region_id', openapi.IN_QUERY, description='region_id', type=openapi.TYPE_INTEGER),
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             city = get_object_or_404(City, pk=pk)
@@ -198,7 +206,12 @@ class EventAPIView(APIView):
             queryset = queryset.filter(city=city_id)
 
         return queryset
-
+    
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('city_id', openapi.IN_QUERY, description='city_id', type=openapi.TYPE_INTEGER),
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             event = get_object_or_404(Event, pk=pk)
@@ -388,7 +401,11 @@ class CommentAPIView(APIView):
             queryset = queryset.filter(tourist=tourist_id)
 
         return queryset
-
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('tourist_id', openapi.IN_QUERY, description='tourist_id', type=openapi.TYPE_INTEGER),
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             comment = get_object_or_404(Comment, pk=pk)
@@ -458,7 +475,16 @@ class PointOfInterestAPIView(APIView):
             queryset = queryset.filter(city__name__icontains=city_filter)
             
         return queryset
-    
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('search', openapi.IN_QUERY, description='search', type=openapi.TYPE_STRING),
+            openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('city', openapi.IN_QUERY, description='city', type=openapi.TYPE_INTEGER),
+
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             point_of_interest = get_object_or_404(PointOfInterest, pk=pk)
@@ -514,7 +540,12 @@ class PointOfInterest_TransportationAPIView(APIView):
             queryset = queryset.filter(point_of_interest=point_of_interest_id)
 
         return queryset
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
 
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
@@ -582,7 +613,13 @@ class OpeningHoursAPIView(APIView):
             queryset = queryset.filter(point_of_interest=point_of_interest_id)
 
         return queryset
+    
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
 
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             opening_hours = get_object_or_404(OpeningHours, pk=pk)
@@ -640,6 +677,13 @@ class PhotoAPIView(APIView):
             queryset = queryset.filter(point_of_interest=point_of_interest_id)
 
         return queryset
+    
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             photo = get_object_or_404(Photo, pk=pk)
@@ -698,6 +742,13 @@ class VideoAPIView(APIView):
             queryset = queryset.filter(point_of_interest=point_of_interest_id)
 
         return queryset
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+
+        ]
+    )
     def get(self, request, pk=None):
         if pk is not None:
             video = get_object_or_404(Video, pk=pk)
