@@ -9,7 +9,7 @@ class Region(models.Model):
         return self.name
         
 class RegionalEmployee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='regionalemployee')
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -17,14 +17,14 @@ class RegionalEmployee(models.Model):
 
 
 class CentralEmployee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='centralemployee')
 
     def __str__(self):
         return self.user.username
 
 
 class Tourist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tourist')
 
     def __str__(self):
         return self.user.username

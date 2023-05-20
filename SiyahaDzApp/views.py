@@ -6,12 +6,13 @@ from .serializers import *
 from .permissions import *
 
 
-# Region views
+# RegionAPIView
 
 class RegionAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk=None):
         if pk is not None:
-            region = Region.objects.get(pk=pk)
+            region = get_object_or_404(Region, pk=pk)
             serializer = RegionSerializer(region)
             return Response(serializer.data, status=status.HTTP_200_OK)
         regions = Region.objects.all()
@@ -32,7 +33,7 @@ class RegionAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        region = Region.objects.get(pk=pk)
+        region = get_object_or_404(Region, pk=pk)
         serializer = RegionSerializer(region, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -42,18 +43,19 @@ class RegionAPIView(APIView):
     def delete(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
-        region = Region.objects.get(pk=pk)
+
+        region = get_object_or_404(Region, pk=pk)
         region.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-# RegionalEmployee views
+# RegionalEmployeeAPIView
 
 class RegionalEmployeeAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk=None):
         if pk is not None:
-            region = Region.objects.get(pk=pk)
-            serializer = RegionSerializer(region)
+            regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
+            serializer = RegionSerializer(regional_employee)
             return Response(serializer.data, status=status.HTTP_200_OK)
         regional_employees = RegionalEmployee.objects.all()
         serializer = RegionalEmployeeSerializer(regional_employees, many=True)
@@ -73,8 +75,8 @@ class RegionalEmployeeAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        regional_employees = RegionalEmployee.objects.get(pk=pk)
-        serializer = RegionSerializer(regional_employees, data=request.data)
+        regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
+        serializer = RegionSerializer(regional_employee, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -83,7 +85,7 @@ class RegionalEmployeeAPIView(APIView):
     def delete(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
-        regional_employee = RegionalEmployee.objects.get(pk=pk)
+        regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
         regional_employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -91,9 +93,11 @@ class RegionalEmployeeAPIView(APIView):
 # TouristAPIView
 
 class TouristAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request, pk=None):
         if pk is not None:
-            tourist = Tourist.objects.get(pk=pk)
+            tourist = get_object_or_404(Tourist, pk=pk)
             serializer = TouristSerializer(tourist)
             return Response(serializer.data, status=status.HTTP_200_OK)
         tourists = Tourist.objects.all()
@@ -111,10 +115,12 @@ class TouristAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+
+        tourist = get_object_or_404(Tourist, pk=pk)
+        # Check if the user is a CentralEmployee or the tourist themselves
+        if not IsCentralEmployee().has_permission(request, self) and request.user.id != tourist.user.id:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        tourist = Tourist.objects.get(pk=pk)
         serializer = TouristSerializer(tourist, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -125,85 +131,115 @@ class TouristAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        tourist = Tourist.objects.get(pk=pk)
+        tourist = get_object_or_404(Tourist, pk=pk)
         tourist.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 # CityAPIView
 
 class CityAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = City.objects.all()
+        region_id = self.request.query_params.get('region_id')
+
+        if region_id:
+            queryset = queryset.filter(region=region_id)
+
+        return queryset
+
+
     def get(self, request, pk=None):
         if pk is not None:
-            city = City.objects.get(pk=pk)
+            city = get_object_or_404(City, pk=pk)
             serializer = CitySerializer(city)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        cities = City.objects.all()
-        serializer = CitySerializer(cities, many=True)
+        queryset = self.get_queryset()
+        serializer = CitySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = CitySerializer(data=request.data)
         if serializer.is_valid():
+            city = serializer.validated_data.get('city')
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, view, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        city = City.objects.get(pk=pk)
+        city = get_object_or_404(City, pk=pk)
         serializer = CitySerializer(city, data=request.data)
         if serializer.is_valid():
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, view, serializer.data)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        city = get_object_or_404(City, pk=pk)
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, view, city)):
             return Response(status=status.HTTP_403_FORBIDDEN)
-
-        city = City.objects.get(pk=pk)
         city.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 # EventAPIView
 class EventAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = EventAPIView.objects.all()
+        city_id = self.request.query_params.get('city_id')
+
+        if city_id:
+            queryset = queryset.filter(city=city_id)
+
+        return queryset
+
     def get(self, request, pk=None):
         if pk is not None:
-            event = Event.objects.get(pk=pk)
+            event = get_object_or_404(Event, pk=pk)
             serializer = EventSerializer(event)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        events = Event.objects.all()
-        serializer = EventSerializer(events, many=True)
+        queryset = self.get_queryset()
+        serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-
         serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
+            city = serializer.validated_data.get('city')
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
 
-        event = Event.objects.get(pk=pk)
+        event = get_object_or_404(Event, pk=pk)
         serializer = EventSerializer(event, data=request.data)
         if serializer.is_valid():
+            city = serializer.validated_data.get('city')
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
 
-        event = Event.objects.get(pk=pk)
+        event = get_object_or_404(Event, pk=pk)
+        city = event.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
+            return Response(status=status.HTTP_403_FORBIDDEN)
         event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -211,9 +247,10 @@ class EventAPIView(APIView):
 # CategoryAPIView
 
 class CategoryAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk=None):
         if pk is not None:
-            category = Category.objects.get(pk=pk)
+            category = get_object_or_404(Category, pk=pk)
             serializer = CategorySerializer(category)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -235,7 +272,7 @@ class CategoryAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        category = Category.objects.get(pk=pk)
+        category = get_object_or_404(Category, pk=pk)
         serializer = CategorySerializer(category, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -246,7 +283,7 @@ class CategoryAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        category = Category.objects.get(pk=pk)
+        category = get_object_or_404(Category, pk=pk)
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -254,9 +291,10 @@ class CategoryAPIView(APIView):
 # ThemeAPIView
 
 class ThemeAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk=None):
         if pk is not None:
-            theme = Theme.objects.get(pk=pk)
+            theme = get_object_or_404(Theme, pk=pk)
             serializer = ThemeSerializer(theme)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -278,7 +316,7 @@ class ThemeAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        theme = Theme.objects.get(pk=pk)
+        theme = get_object_or_404(Theme, pk=pk)
         serializer = ThemeSerializer(theme, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -289,7 +327,7 @@ class ThemeAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        theme = Theme.objects.get(pk=pk)
+        theme = get_object_or_404(Theme, pk=pk)
         theme.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -297,9 +335,10 @@ class ThemeAPIView(APIView):
 # TransportationAPIView
 
 class TransportationAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get(self, request, pk=None):
         if pk is not None:
-            transportation = Transportation.objects.get(pk=pk)
+            transportation = get_object_or_404(Transportation, pk=pk)
             serializer = TransportationSerializer(transportation)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -321,7 +360,7 @@ class TransportationAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        transportation = Transportation.objects.get(pk=pk)
+        transportation = get_object_or_404(Transportation, pk=pk)
         serializer = TransportationSerializer(
             transportation, data=request.data)
         if serializer.is_valid():
@@ -333,58 +372,26 @@ class TransportationAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        transportation = Transportation.objects.get(pk=pk)
+        transportation = get_object_or_404(Transportation, pk=pk)
         transportation.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# PointOfInterest_TransportationAPIView
-class PointOfInterest_TransportationAPIView(APIView):
-    def get(self, request, pk=None):
-        if pk is not None:
-            point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
-            serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportation)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        point_of_interest_transportations = PointOfInterest_Transportation.objects.all()
-        serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportations, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        serializer = PointOfInterest_TransportationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
-        serializer = PointOfInterest_TransportationSerializer(point_of_interest_transportation, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        point_of_interest_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
-        point_of_interest_transportation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #CommentAPIView
 
 class CommentAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = Comment.objects.all()
+        tourist_id = self.request.query_params.get('tourist_id')
+
+        if tourist_id:
+            queryset = queryset.filter(tourist=tourist_id)
+
+        return queryset
+
     def get(self, request, pk=None):
         if pk is not None:
-            comment = Comment.objects.get(pk=pk)
+            comment = get_object_or_404(Comment, pk=pk)
             serializer = CommentSerializer(comment)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -395,26 +402,27 @@ class CommentAPIView(APIView):
     def post(self, request):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
+            if not IsTourist().has_permission(request, view):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        comment = Comment.objects.get(pk=pk)
+        comment = get_object_or_404(Comment, pk=pk)
         serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid():
+            if not IsTourist().has_permission(request, view, comment):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        comment = get_object_or_404(Comment, pk=pk)
+        if not (IsCentralEmployee().has_permission(request, self) or 
+                IsTourist().has_permission(request, view, comment)):
             return Response(status=status.HTTP_403_FORBIDDEN)
-
-        comment = Comment.objects.get(pk=pk)
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -422,41 +430,74 @@ class CommentAPIView(APIView):
 # PointOfInterestAPIView
 
 class PointOfInterestAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = PointOfInterest.objects.all()
+
+        # Search in name and description
+        search_query = self.request.query_params.get('search')
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query)
+            )
+
+        # filters (category, theme, city)
+        category_filter = self.request.query_params.get('category')
+        theme_filter = self.request.query_params.get('theme')
+        city_filter = self.request.query_params.get('city')
+
+        if category_filter:
+            queryset = queryset.filter(category__name__icontains=category_filter)
+
+        if theme_filter:
+            queryset = queryset.filter(theme__name__icontains=theme_filter)
+
+        if city_filter:
+            queryset = queryset.filter(city__name__icontains=city_filter)
+            
+        return queryset
+    
     def get(self, request, pk=None):
         if pk is not None:
-            poi = PointOfInterest.objects.get(pk=pk)
-            serializer = PointOfInterestSerializer(poi)
+            point_of_interest = get_object_or_404(PointOfInterest, pk=pk)
+            serializer = PointOfInterestSerializer(point_of_interest)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        pois = PointOfInterest.objects.all()
-        serializer = PointOfInterestSerializer(pois, many=True)
+        
+        queryset = self.get_queryset()
+        serializer = PointOfInterestSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = PointOfInterestSerializer(data=request.data)
         if serializer.is_valid():
+            city = serializer.validated_data.get('city')
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        poi = PointOfInterest.objects.get(pk=pk)
+        poi = get_object_or_404(PointOfInterest, pk=pk)
         serializer = PointOfInterestSerializer(poi, data=request.data)
         if serializer.is_valid():
+            city = serializer.validated_data.get('city')
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        poi = get_object_or_404(PointOfInterest, pk=pk)
+        city = poi.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
             return Response(status=status.HTTP_403_FORBIDDEN)
-
-        poi = PointOfInterest.objects.get(pk=pk)
         poi.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -464,26 +505,35 @@ class PointOfInterestAPIView(APIView):
 # PointOfInterest_TransportationAPIView
 
 class PointOfInterest_TransportationAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = PointOfInterest_Transportation.objects.all()
+        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+
+        if point_of_interest_id:
+            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+
+        return queryset
+
     def get(self, request, pk=None):
         if pk is not None:
-            poi_transportation = PointOfInterest_Transportation.objects.get(
-                pk=pk)
-            serializer = PointOfInterest_TransportationSerializer(
-                poi_transportation)
+            poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
+            serializer = PointOfInterest_TransportationSerializer(poi_transportation)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        poi_transportations = PointOfInterest_Transportation.objects.all()
-        serializer = PointOfInterest_TransportationSerializer(
-            poi_transportations, many=True)
+        queryset = self.get_queryset()
+        serializer = PointOfInterestTransportationSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = PointOfInterest_TransportationSerializer(
             data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -492,10 +542,15 @@ class PointOfInterest_TransportationAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        poi_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
+        poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
         serializer = PointOfInterest_TransportationSerializer(
             poi_transportation, data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -504,7 +559,13 @@ class PointOfInterest_TransportationAPIView(APIView):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        poi_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
+        poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
+        point_of_interest = poi_transportation.point_of_interest
+        city = point_of_interest.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         poi_transportation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -512,132 +573,115 @@ class PointOfInterest_TransportationAPIView(APIView):
 # OpeningHoursAPIView
 
 class OpeningHoursAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = OpeningHours.objects.all()
+        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+
+        if point_of_interest_id:
+            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+
+        return queryset
+
     def get(self, request, pk=None):
         if pk is not None:
-            opening_hours = OpeningHours.objects.get(pk=pk)
+            opening_hours = get_object_or_404(OpeningHours, pk=pk)
             serializer = OpeningHoursSerializer(opening_hours)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        opening_hours_list = OpeningHours.objects.all()
-        serializer = OpeningHoursSerializer(opening_hours_list, many=True)
+        queryset = self.get_queryset()
+        serializer = OpeningHoursSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = OpeningHoursSerializer(data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        opening_hours = OpeningHours.objects.get(pk=pk)
+        opening_hours = get_object_or_404(OpeningHours, pk=pk)
         serializer = OpeningHoursSerializer(opening_hours, data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        opening_hours = get_object_or_404(OpeningHours, pk=pk)
+        point_of_interest = opening_hours.point_of_interest
+        city = point_of_interest.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
             return Response(status=status.HTTP_403_FORBIDDEN)
-
-        opening_hours = OpeningHours.objects.get(pk=pk)
         opening_hours.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# PointOfInterest_TransportationAPIView
-
-class PointOfInterest_TransportationAPIView(APIView):
-    def get(self, request, pk=None):
-        if pk is not None:
-            poi_transportation = PointOfInterest_Transportation.objects.get(
-                pk=pk)
-            serializer = PointOfInterest_TransportationSerializer(
-                poi_transportation)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        poi_transportations = PointOfInterest_Transportation.objects.all()
-        serializer = PointOfInterest_TransportationSerializer(
-            poi_transportations, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        serializer = PointOfInterest_TransportationSerializer(
-            data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        poi_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
-        serializer = PointOfInterest_TransportationSerializer(
-            poi_transportation, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        poi_transportation = PointOfInterest_Transportation.objects.get(pk=pk)
-        poi_transportation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # PhotoAPIView
 
 class PhotoAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = Photo.objects.all()
+        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+
+        if point_of_interest_id:
+            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+
+        return queryset
     def get(self, request, pk=None):
         if pk is not None:
-            photo = Photo.objects.get(pk=pk)
+            photo = get_object_or_404(Photo, pk=pk)
             serializer = PhotoSerializer(photo)
             return Response(serializer.data, status=status.HTTP_200_OK)
-
-        photos = Photo.objects.all()
-        serializer = PhotoSerializer(photos, many=True)
+        queryset = self.get_queryset()
+        serializer = PhotoSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = PhotoSerializer(data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        photo = Photo.objects.get(pk=pk)
+        photo = get_object_or_404(Photo, pk=pk)
         serializer = PhotoSerializer(photo, data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        photo = get_object_or_404(Photo, pk=pk)
+        point_of_interest = photo.point_of_interest
+        city = point_of_interest.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        photo = Photo.objects.get(pk=pk)
         photo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -645,40 +689,56 @@ class PhotoAPIView(APIView):
 # VideoAPIView
 
 class VideoAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    def get_queryset(self):
+        queryset = Video.objects.all()
+        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+
+        if point_of_interest_id:
+            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+
+        return queryset
     def get(self, request, pk=None):
         if pk is not None:
-            video = Video.objects.get(pk=pk)
+            video = get_object_or_404(Video, pk=pk)
             serializer = VideoSerializer(video)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        videos = Video.objects.all()
-        serializer = VideoSerializer(videos, many=True)
+        queryset = self.get_queryset()
+        serializer = VideoSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
         serializer = VideoSerializer(data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        video = Video.objects.get(pk=pk)
+        video = get_object_or_404(Video, pk=pk)
         serializer = VideoSerializer(video, data=request.data)
         if serializer.is_valid():
+            point_of_interest = serializer.validated_data.get('point_of_interest')
+            city = point_of_interest.city
+            if not (IsCentralEmployee().has_permission(request, self) or
+                    IsRegionalEmployee().has_permission(request, self, city)):
+                return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
+        video = get_object_or_404(Video, pk=pk)
+        point_of_interest = video.point_of_interest
+        city = point_of_interest.city
+        if not (IsCentralEmployee().has_permission(request, self) or
+                IsRegionalEmployee().has_permission(request, self, city)):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        video = Video.objects.get(pk=pk)
         video.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
