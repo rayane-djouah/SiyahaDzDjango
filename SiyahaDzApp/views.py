@@ -23,6 +23,7 @@ class RegionAPIView(APIView):
         serializer = RegionSerializer(regions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=RegionSerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -33,6 +34,7 @@ class RegionAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=RegionSerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -65,6 +67,7 @@ class RegionalEmployeeAPIView(APIView):
         serializer = RegionalEmployeeSerializer(regional_employees, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=RegionalEmployeeSerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -75,6 +78,7 @@ class RegionalEmployeeAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=RegionalEmployeeSerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -108,6 +112,7 @@ class TouristAPIView(APIView):
         serializer = TouristSerializer(tourists, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=TouristSerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -118,6 +123,7 @@ class TouristAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=TouristSerializer)
     def put(self, request, pk):
 
         tourist = get_object_or_404(Tourist, pk=pk)
@@ -166,6 +172,7 @@ class CityAPIView(APIView):
         serializer = CitySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=CitySerializer)
     def post(self, request):
         serializer = CitySerializer(data=request.data)
         if serializer.is_valid():
@@ -177,6 +184,7 @@ class CityAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=CitySerializer)
     def put(self, request, pk):
         city = get_object_or_404(City, pk=pk)
         serializer = CitySerializer(city, data=request.data)
@@ -222,6 +230,7 @@ class EventAPIView(APIView):
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=EventSerializer)
     def post(self, request):
         serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
@@ -233,8 +242,8 @@ class EventAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=EventSerializer)
     def put(self, request, pk):
-
         event = get_object_or_404(Event, pk=pk)
         serializer = EventSerializer(event, data=request.data)
         if serializer.is_valid():
@@ -271,6 +280,7 @@ class CategoryAPIView(APIView):
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=CategorySerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -281,6 +291,7 @@ class CategoryAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=CategorySerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -315,6 +326,7 @@ class ThemeAPIView(APIView):
         serializer = ThemeSerializer(themes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=ThemeSerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -325,6 +337,7 @@ class ThemeAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=ThemeSerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -359,6 +372,7 @@ class TransportationAPIView(APIView):
         serializer = TransportationSerializer(transportations, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=TransportationSerializer)
     def post(self, request):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -369,6 +383,7 @@ class TransportationAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=TransportationSerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -416,6 +431,7 @@ class CommentAPIView(APIView):
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=CommentSerializer)
     def post(self, request):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
@@ -425,6 +441,7 @@ class CommentAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=CommentSerializer)
     def put(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
         serializer = CommentSerializer(comment, data=request.data)
@@ -495,6 +512,7 @@ class PointOfInterestAPIView(APIView):
         serializer = PointOfInterestSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=PointOfInterestSerializer)
     def post(self, request):
         serializer = PointOfInterestSerializer(data=request.data)
         if serializer.is_valid():
@@ -506,6 +524,7 @@ class PointOfInterestAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=PointOfInterestSerializer)
     def put(self, request, pk):
         poi = get_object_or_404(PointOfInterest, pk=pk)
         serializer = PointOfInterestSerializer(poi, data=request.data)
@@ -556,6 +575,7 @@ class PointOfInterest_TransportationAPIView(APIView):
         serializer = PointOfInterestTransportationSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=PointOfInterestTransportationSerializer)
     def post(self, request):
         serializer = PointOfInterest_TransportationSerializer(
             data=request.data)
@@ -568,7 +588,8 @@ class PointOfInterest_TransportationAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
+    @swagger_auto_schema(request_body=PointOfInterestTransportationSerializer)
     def put(self, request, pk):
         if not IsCentralEmployee().has_permission(request, self):
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -629,6 +650,7 @@ class OpeningHoursAPIView(APIView):
         serializer = OpeningHoursSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=OpeningHoursSerializer)
     def post(self, request):
         serializer = OpeningHoursSerializer(data=request.data)
         if serializer.is_valid():
@@ -641,6 +663,7 @@ class OpeningHoursAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=OpeningHoursSerializer)
     def put(self, request, pk):
         opening_hours = get_object_or_404(OpeningHours, pk=pk)
         serializer = OpeningHoursSerializer(opening_hours, data=request.data)
@@ -693,6 +716,7 @@ class PhotoAPIView(APIView):
         serializer = PhotoSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=PhotoSerializer)
     def post(self, request):
         serializer = PhotoSerializer(data=request.data)
         if serializer.is_valid():
@@ -705,6 +729,7 @@ class PhotoAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=PhotoSerializer)
     def put(self, request, pk):
         photo = get_object_or_404(Photo, pk=pk)
         serializer = PhotoSerializer(photo, data=request.data)
@@ -758,6 +783,7 @@ class VideoAPIView(APIView):
         serializer = VideoSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=VideoSerializer)
     def post(self, request):
         serializer = VideoSerializer(data=request.data)
         if serializer.is_valid():
@@ -770,6 +796,7 @@ class VideoAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(request_body=VideoSerializer)
     def put(self, request, pk):
         video = get_object_or_404(Video, pk=pk)
         serializer = VideoSerializer(video, data=request.data)
