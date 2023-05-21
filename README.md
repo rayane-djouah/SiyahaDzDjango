@@ -13,7 +13,7 @@ The API is built using Django and Django REST Framework, providing a RESTful int
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/rayane-djouah/SiyahaDZDjango.git
+   git clone https://github.com/rayane-djouah/SiyahaDzDjango.git
 
    ```
 
@@ -29,7 +29,6 @@ The API is built using Django and Django REST Framework, providing a RESTful int
 Create a .env file in the project root directory and define the required environment variables. For example:
 
 ```plaintext
-
 DB_ENGINE=django.db.backends.your-database-management-system
 DB_NAME=your-database-name
 DB_USER=your-database-user
@@ -59,7 +58,8 @@ The API will be accessible at http://localhost:8000/.
 ## API Documentation
 
 The API provides comprehensive documentation using Swagger. You can access the API documentation by visiting the Swagger UI at http://localhost:8000/swagger/.
-Usage
+
+## Usage
 
 The API supports various endpoints for managing points of interest, events, cities, regions, and other related entities. Here are some of the main endpoints:
 
