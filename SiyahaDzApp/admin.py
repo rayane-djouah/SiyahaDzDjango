@@ -1,7 +1,21 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 # Register your models here.
+
+class RegionalEmployeeAdmin(admin.ModelAdmin):
+    list_display = ('user', 'region')
+    list_filter = ('region',)
+    search_fields = ('user__username', 'region__name')
+
+class CentralEmployeeAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    search_fields = ('user__username',)
+
+class TouristAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    search_fields = ('user__username',)
 
 class RegionAdmin(admin.ModelAdmin):
     list_display = ['name']
@@ -40,6 +54,9 @@ class VideoAdmin(admin.ModelAdmin):
     list_display = ['point_of_interest', 'video']
 
 # Register your models with the customized ModelAdmin classes
+admin.site.register(RegionalEmployee, RegionalEmployeeAdmin)
+admin.site.register(CentralEmployee, CentralEmployeeAdmin)
+admin.site.register(Tourist, TouristAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Event, EventAdmin)

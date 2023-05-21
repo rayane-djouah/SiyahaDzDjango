@@ -16,7 +16,10 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('regions/', RegionAPIView.as_view(), name='regions'),
+    path('register/', UserRegistrationAPIView.as_view(), name='user-register'),
+    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),    path('regions/', RegionAPIView.as_view(), name='regions'),
+    path('logout/', UserLogoutAPIView.as_view(), name='user-logout'),
     path('regions/<int:pk>/', RegionAPIView.as_view(), name='region-detail'),
     path('cities/', CityAPIView.as_view(), name='cities'),
     path('cities/<int:pk>/', CityAPIView.as_view(), name='city-detail'),

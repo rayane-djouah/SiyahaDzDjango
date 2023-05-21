@@ -22,15 +22,11 @@ class CentralEmployee(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Tourist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tourist')
 
     def __str__(self):
         return self.user.username
-
-
-
 
 class City(models.Model):
     name = models.CharField(max_length=100)
@@ -48,10 +44,6 @@ class Event(models.Model):
     def __str__(self):
         return self.name
     
-
-
-
-
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -64,17 +56,11 @@ class Theme(models.Model):
     def __str__(self):
         return self.name
     
-
 class Transportation(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-     
-
-
-
-
 
 class PointOfInterest(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -88,7 +74,6 @@ class PointOfInterest(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class Comment(models.Model):
     tourist = models.ForeignKey(Tourist, on_delete=models.CASCADE)
@@ -117,15 +102,12 @@ class PointOfInterest_Transportation(models.Model):
     def __str__(self):
         return f"{self.point_of_interest.name} - {transportation.name}"  
     
-    
-    
 class Photo(models.Model):
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='storage/photos/')
 
     def __str__(self):
         return self.image.name
-    
 
 class Video(models.Model):
     point_of_interest = models.ForeignKey(
