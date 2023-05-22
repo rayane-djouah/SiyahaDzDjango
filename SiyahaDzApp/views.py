@@ -38,14 +38,14 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
     @swagger_auto_schema(
         operation_summary='Obtain Access and Refresh Tokens',
-        operation_description='Obtains the access and refresh tokens using the provided username and password.',
+        operation_description='Obtains the access and refresh tokens using the provided email and password.',
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                'email': openapi.Schema(type=openapi.TYPE_STRING),  # Update to use 'email'
                 'password': openapi.Schema(type=openapi.TYPE_STRING),
             },
-            required=['username', 'password'],
+            required=['email', 'password'],  # Update to use 'email'
         ),
         responses={
             200: openapi.Response(
@@ -68,7 +68,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
         },
     )
     def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
+            return super().post(request, *args, **kwargs)
     
 class MyTokenRefreshView(TokenRefreshView):
     """
@@ -353,10 +353,10 @@ class CityAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = City.objects.all()
-        region_id = self.request.query_params.get('region_id')
+        region = self.request.query_params.get('region')
 
-        if region_id:
-            queryset = queryset.filter(region=region_id)
+        if region:
+            queryset = queryset.filter(region=region)
 
         return queryset
 
@@ -368,7 +368,7 @@ class CityAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
                 ),
-            openapi.Parameter('region_id', openapi.IN_QUERY, description='region_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('region', openapi.IN_QUERY, description='region name', type=openapi.TYPE_INTEGER),
         ]
     )
     def get(self, request, pk=None):
@@ -444,10 +444,10 @@ class EventAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Event.objects.all()
-        city_id = self.request.query_params.get('city_id')
+        city = self.request.query_params.get('city')
 
-        if city_id:
-            queryset = queryset.filter(city=city_id)
+        if city:
+            queryset = queryset.filter(city=city)
 
         return queryset
     
@@ -459,7 +459,7 @@ class EventAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
                 ),
-            openapi.Parameter('city_id', openapi.IN_QUERY, description='city_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('city', openapi.IN_QUERY, description='city name', type=openapi.TYPE_INTEGER),
         ]
     )
     def get(self, request, pk=None):
@@ -766,10 +766,10 @@ class CommentAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Comment.objects.all()
-        tourist_id = self.request.query_params.get('tourist_id')
+        tourist = self.request.query_params.get('tourist')
 
-        if tourist_id:
-            queryset = queryset.filter(tourist=tourist_id)
+        if tourist:
+            queryset = queryset.filter(tourist=tourist)
 
         return queryset
     @swagger_auto_schema(
@@ -780,7 +780,7 @@ class CommentAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
                 ),
-            openapi.Parameter('tourist_id', openapi.IN_QUERY, description='tourist_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('tourist', openapi.IN_QUERY, description='tourist email', type=openapi.TYPE_INTEGER),
         ]
     )
     def get(self, request, pk=None):
@@ -979,10 +979,10 @@ class PointOfInterest_TransportationAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = PointOfInterest_Transportation.objects.all()
-        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+        point_of_interest = self.request.query_params.get('point_of_interest')
 
-        if point_of_interest_id:
-            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+        if point_of_interest:
+            queryset = queryset.filter(point_of_interest=point_of_interest)
 
         return queryset
     @swagger_auto_schema(
@@ -993,7 +993,7 @@ class PointOfInterest_TransportationAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
             ),
-            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
 
         ]
     )
@@ -1089,10 +1089,10 @@ class OpeningHoursAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = OpeningHours.objects.all()
-        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+        point_of_interest = self.request.query_params.get('point_of_interest')
 
-        if point_of_interest_id:
-            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+        if point_of_interest:
+            queryset = queryset.filter(point_of_interest=point_of_interest)
 
         return queryset
     
@@ -1104,7 +1104,7 @@ class OpeningHoursAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
             ),
-            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
 
         ]
     )
@@ -1189,10 +1189,10 @@ class PhotoAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Photo.objects.all()
-        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+        point_of_interest = self.request.query_params.get('point_of_interest')
 
-        if point_of_interest_id:
-            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+        if point_of_interest:
+            queryset = queryset.filter(point_of_interest=point_of_interest)
 
         return queryset
     
@@ -1204,7 +1204,7 @@ class PhotoAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
             ),
-            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
 
         ]
     )
@@ -1306,10 +1306,10 @@ class VideoAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Video.objects.all()
-        point_of_interest_id = self.request.query_params.get('point_of_interest_id')
+        point_of_interest = self.request.query_params.get('point_of_interest')
 
-        if point_of_interest_id:
-            queryset = queryset.filter(point_of_interest=point_of_interest_id)
+        if point_of_interest:
+            queryset = queryset.filter(point_of_interest=point_of_interest)
 
         return queryset
 
@@ -1321,7 +1321,7 @@ class VideoAPIView(APIView):
                     description='Bearer Token',
                     type=openapi.TYPE_STRING
             ),
-            openapi.Parameter('point_of_interest_id', openapi.IN_QUERY, description='point_of_interest_id', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
 
         ]
     )
