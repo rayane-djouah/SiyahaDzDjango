@@ -9,8 +9,9 @@ from .serializers import *
 from .permissions import *
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-
+ 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserRegistrationAPIView(APIView):
@@ -42,10 +43,11 @@ class MyTokenObtainPairView(TokenObtainPairView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'email': openapi.Schema(type=openapi.TYPE_STRING),  # Update to use 'email'
+                'username': openapi.Schema(type=openapi.TYPE_STRING),  
+                'email': openapi.Schema(type=openapi.TYPE_STRING), 
                 'password': openapi.Schema(type=openapi.TYPE_STRING),
             },
-            required=['email', 'password'],  # Update to use 'email'
+            required=['email', 'password'],
         ),
         responses={
             200: openapi.Response(
@@ -105,9 +107,9 @@ class UserLogoutAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'refresh_token': openapi.Schema(type=openapi.TYPE_STRING),
+                'refresh': openapi.Schema(type=openapi.TYPE_STRING),
             },
-            required=['refresh_token'],
+            required=['refresh'],
         ),
         responses={
             status.HTTP_205_RESET_CONTENT: openapi.Response(
@@ -120,7 +122,7 @@ class UserLogoutAPIView(APIView):
     )
     def post(self, request):
         try:
-            refresh_token = request.data["refresh_token"]
+            refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
