@@ -1,39 +1,5 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-
-class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError("The Email field must be set")
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self.create_user(email, password, **extra_fields)
-
-class User(AbstractBaseUser):
-    email = models.EmailField(unique=True, primary_key=True)
-    username = models.CharField(max_length=150, unique=False)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
-
-    def __str__(self):
-        return self.email
-
-    # Add any additional fields or methods as needed
+from django.contrib.auth.models import User
 
 
 class Region(models.Model):
@@ -61,26 +27,10 @@ class Tourist(models.Model):
     
     def __str__(self):
         return self.user.username
-
-class City(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
     
-class Event(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
-    description = models.TextField()
-    date = models.DateField()
-
-    def __str__(self):
-        return self.name
     
 class Category(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
-    
     def __str__(self):
         return self.name
 
@@ -100,12 +50,26 @@ class PointOfInterest(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    city = models.CharField(max_length=100)
+    commune = models.CharField(max_length=100)
     latitude = models.FloatField()
     longitude = models.FloatField()
     description = models.TextField()
     views_count = models.IntegerField(default=0)
+    openhour = models.TimeField
+    closehour = models.TimeField
+    
+    def __str__(self):
+        return self.name
 
+class Event(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
+    description = models.TextField()
+    opendate = models.DateField()
+    closedate = models.DateField()
+    image = models.ImageField(upload_to="storage/photos/photoevent")
+    
     def __str__(self):
         return self.name
 
@@ -151,7 +115,7 @@ class PointOfInterest_Transportation(models.Model):
 class Photo(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='storage/photos/')
+    image = models.ImageField(upload_to='storage/photos/point_of_interest')
 
     def __str__(self):
         return self.image.name

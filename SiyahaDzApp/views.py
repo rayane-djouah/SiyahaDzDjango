@@ -349,119 +349,21 @@ class TouristAPIView(APIView):
         tourist.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# CityAPIView
-
-class CityAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get_queryset(self):
-        queryset = City.objects.all()
-        region = self.request.query_params.get('region')
-
-        if region:
-            queryset = queryset.filter(region=region)
-
-        return queryset
-
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                ),
-            openapi.Parameter('region', openapi.IN_QUERY, description='region name', type=openapi.TYPE_INTEGER),
-        ]
-    )
-    def get(self, request, pk=None):
-        if pk is not None:
-            city = get_object_or_404(City, pk=pk)
-            serializer = CitySerializer(city)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        queryset = self.get_queryset()
-        serializer = CitySerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-            ],
-        request_body=CitySerializer)
-    def post(self, request):
-        serializer = CitySerializer(data=request.data)
-        if serializer.is_valid():
-            city = serializer.validated_data.get('city')
-            if not (IsCentralEmployee().has_permission(request, self) or
-                    IsRegionalEmployee().has_permission(request, view, city)):
-                return Response(status=status.HTTP_403_FORBIDDEN)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-            ],
-        request_body=CitySerializer)
-    def put(self, request, pk):
-        city = get_object_or_404(City, pk=pk)
-        serializer = CitySerializer(city, data=request.data)
-        if serializer.is_valid():
-            if not (IsCentralEmployee().has_permission(request, self) or
-                    IsRegionalEmployee().has_permission(request, view, serializer.data)):
-                return Response(status=status.HTTP_403_FORBIDDEN)
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-    )
-    def delete(self, request, pk):
-        city = get_object_or_404(City, pk=pk)
-        if not (IsCentralEmployee().has_permission(request, self) or
-                IsRegionalEmployee().has_permission(request, view, city)):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        city.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 # EventAPIView
 class EventAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Event.objects.all()
-        city = self.request.query_params.get('city')
+        point_of_interest = self.request.query_params.get('point_of_interest')
 
-        if city:
-            queryset = queryset.filter(city=city)
+        if point_of_interest:
+            queryset = queryset.filter(point_of_interest=point_of_interest)
 
         return queryset
     
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                ),
-            openapi.Parameter('city', openapi.IN_QUERY, description='city name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest name', type=openapi.TYPE_INTEGER),
         ]
     )
     def get(self, request, pk=None):
@@ -487,7 +389,7 @@ class EventAPIView(APIView):
     def post(self, request):
         serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
-            city = serializer.validated_data.get('city')
+            point_of_interest = serializer.validated_data.get('point_of_interest')
             if not (IsCentralEmployee().has_permission(request, self) or
                     IsRegionalEmployee().has_permission(request, self, city)):
                 return Response(status=status.HTTP_403_FORBIDDEN)

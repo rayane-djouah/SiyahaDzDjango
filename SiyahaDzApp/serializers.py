@@ -36,6 +36,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         return token
 
+
 class RegionalEmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RegionalEmployee
@@ -57,12 +58,6 @@ class TouristSerializer(serializers.ModelSerializer):
 class RegionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Region
-        fields = '__all__'
-
-
-class CitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = City
         fields = '__all__'
 
 

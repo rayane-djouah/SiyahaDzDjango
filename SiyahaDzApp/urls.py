@@ -21,8 +21,6 @@ urlpatterns = [
     path('token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),    path('regions/', RegionAPIView.as_view(), name='regions'),
     path('logout/', UserLogoutAPIView.as_view(), name='user-logout'),
     path('regions/<str:pk>/', RegionAPIView.as_view(), name='region-detail'),
-    path('cities/', CityAPIView.as_view(), name='cities'),
-    path('cities/<str:pk>/', CityAPIView.as_view(), name='city-detail'),
     path('events/', EventAPIView.as_view(), name='events'),
     path('events/<str:pk>/', EventAPIView.as_view(), name='event-detail'),
     path('regional-employees/', RegionalEmployeeAPIView.as_view(), name='regional-employees'),

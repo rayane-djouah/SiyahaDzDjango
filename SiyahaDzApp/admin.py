@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 # Register your models here.
@@ -20,11 +19,8 @@ class TouristAdmin(admin.ModelAdmin):
 class RegionAdmin(admin.ModelAdmin):
     list_display = ['name']
 
-class CityAdmin(admin.ModelAdmin):
-    list_display = ['name', 'region']
-
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['name', 'city', 'date']
+    list_display = ['name', 'point_of_interest', 'opendate', 'closedate']
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['tourist', 'point_of_interest', 'comment']
@@ -53,12 +49,10 @@ class PhotoAdmin(admin.ModelAdmin):
 class VideoAdmin(admin.ModelAdmin):
     list_display = ['point_of_interest', 'video']
 
-# Register your models with the customized ModelAdmin classes
 admin.site.register(RegionalEmployee, RegionalEmployeeAdmin)
 admin.site.register(CentralEmployee, CentralEmployeeAdmin)
 admin.site.register(Tourist, TouristAdmin)
 admin.site.register(Region, RegionAdmin)
-admin.site.register(City, CityAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(PointOfInterest, PointOfInterestAdmin)
