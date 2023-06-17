@@ -74,10 +74,10 @@ class Comment(models.Model):
     rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
-        return f"{self.tourist.username} - {self.point_of_interest.name}"
+        return f"{self.tourist.user.email} - {self.point_of_interest.name}"
 
     def save(self, *args, **kwargs):
-        self.id = f"{self.tourist.username}-{self.point_of_interest.name}"
+        self.id = f"{self.tourist.user.email}-{self.point_of_interest.name}"
         super().save(*args, **kwargs)
 
 
