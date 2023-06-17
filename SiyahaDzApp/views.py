@@ -133,8 +133,8 @@ class UserLogoutAPIView(APIView):
 # RegionalEmployeeAPIView
 
 class RegionalEmployeeAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, pk=None):
+    permission_classes = [IsAuthenticatedOrReadOnly]   
+    def get(self,request,pk):
         if pk is not None:
             regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
             serializer = RegionalEmployeeSerializer(regional_employee)
@@ -207,7 +207,7 @@ class RegionalEmployeeAPIView(APIView):
 class TouristAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             tourist = get_object_or_404(Tourist, pk=pk)
             serializer = TouristSerializer(tourist)
@@ -294,7 +294,7 @@ class EventAPIView(APIView):
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest name', type=openapi.TYPE_INTEGER),
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             event = get_object_or_404(Event, pk=pk)
             serializer = EventSerializer(event)
@@ -373,7 +373,7 @@ class EventAPIView(APIView):
 
 class TransportationAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             transportation = get_object_or_404(Transportation, pk=pk)
             serializer = TransportationSerializer(transportation)
@@ -462,7 +462,7 @@ class CommentAPIView(APIView):
             openapi.Parameter('tourist', openapi.IN_QUERY, description='tourist email', type=openapi.TYPE_INTEGER),
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             comment = get_object_or_404(Comment, pk=pk)
             serializer = CommentSerializer(comment)
@@ -565,12 +565,6 @@ class PointOfInterestAPIView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-            ),
             openapi.Parameter('search', openapi.IN_QUERY, description='search', type=openapi.TYPE_STRING),
             openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_INTEGER),
             openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_INTEGER),
@@ -578,7 +572,7 @@ class PointOfInterestAPIView(APIView):
 
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             point_of_interest = get_object_or_404(PointOfInterest, pk=pk)
             serializer = PointOfInterestSerializer(point_of_interest)
@@ -676,7 +670,7 @@ class PointOfInterest_TransportationAPIView(APIView):
 
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
             serializer = PointOfInterestTransportationSerializer(poi_transportation)
@@ -786,7 +780,7 @@ class PhotoAPIView(APIView):
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             photo = get_object_or_404(Photo, pk=pk)
             serializer = PhotoSerializer(photo)
@@ -903,7 +897,7 @@ class VideoAPIView(APIView):
 
         ]
     )
-    def get(self, pk=None):
+    def get(self,request,pk):
         if pk is not None:
             video = get_object_or_404(Video, pk=pk)
             serializer = VideoSerializer(video)
