@@ -55,10 +55,6 @@ class TouristSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class RegionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Region
-        fields = '__all__'
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -76,24 +72,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class PointOfInterestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PointOfInterest
-        fields = '__all__'
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-
-class ThemeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Theme
-        fields = '__all__'
-
-
-class OpeningHoursSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OpeningHours
         fields = '__all__'
 
 

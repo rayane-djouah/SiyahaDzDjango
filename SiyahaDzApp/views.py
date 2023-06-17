@@ -1,7 +1,7 @@
 from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
 from .models import *
@@ -130,86 +130,14 @@ class UserLogoutAPIView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# RegionAPIView
-
-class RegionAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, request, pk=None):
-        if pk is not None:
-            region = get_object_or_404(Region, pk=pk)
-            serializer = RegionSerializer(region)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        regions = Region.objects.all()
-        serializer = RegionSerializer(regions, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-            ],
-        request_body=RegionSerializer)
-    def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        serializer = RegionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-            ],
-        request_body=RegionSerializer)
-    def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        region = get_object_or_404(Region, pk=pk)
-        serializer = RegionSerializer(region, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-    )
-    def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        region = get_object_or_404(Region, pk=pk)
-        region.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 # RegionalEmployeeAPIView
 
 class RegionalEmployeeAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
-            serializer = RegionSerializer(regional_employee)
+            serializer = RegionalEmployeeSerializer(regional_employee)
             return Response(serializer.data, status=status.HTTP_200_OK)
         regional_employees = RegionalEmployee.objects.all()
         serializer = RegionalEmployeeSerializer(regional_employees, many=True)
@@ -250,7 +178,7 @@ class RegionalEmployeeAPIView(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
-        serializer = RegionSerializer(regional_employee, data=request.data)
+        serializer = RegionalEmployeeSerializer(regional_employee, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -279,7 +207,7 @@ class RegionalEmployeeAPIView(APIView):
 class TouristAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             tourist = get_object_or_404(Tourist, pk=pk)
             serializer = TouristSerializer(tourist)
@@ -366,7 +294,7 @@ class EventAPIView(APIView):
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest name', type=openapi.TYPE_INTEGER),
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             event = get_object_or_404(Event, pk=pk)
             serializer = EventSerializer(event)
@@ -440,160 +368,12 @@ class EventAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# CategoryAPIView
-
-class CategoryAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, request, pk=None):
-        if pk is not None:
-            category = get_object_or_404(Category, pk=pk)
-            serializer = CategorySerializer(category)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        categories = Category.objects.all()
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=CategorySerializer)
-    def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=CategorySerializer)
-    def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        category = get_object_or_404(Category, pk=pk)
-        serializer = CategorySerializer(category, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-    )
-    def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        category = get_object_or_404(Category, pk=pk)
-        category.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# ThemeAPIView
-
-class ThemeAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, request, pk=None):
-        if pk is not None:
-            theme = get_object_or_404(Theme, pk=pk)
-            serializer = ThemeSerializer(theme)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        themes = Theme.objects.all()
-        serializer = ThemeSerializer(themes, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=ThemeSerializer)
-    def post(self, request):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        serializer = ThemeSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=ThemeSerializer)
-    def put(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        theme = get_object_or_404(Theme, pk=pk)
-        serializer = ThemeSerializer(theme, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-    )
-    def delete(self, request, pk):
-        if not IsCentralEmployee().has_permission(request, self):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        theme = get_object_or_404(Theme, pk=pk)
-        theme.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 # TransportationAPIView
 
 class TransportationAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             transportation = get_object_or_404(Transportation, pk=pk)
             serializer = TransportationSerializer(transportation)
@@ -664,6 +444,7 @@ class TransportationAPIView(APIView):
         transportation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 #CommentAPIView
 
 class CommentAPIView(APIView):
@@ -687,7 +468,7 @@ class CommentAPIView(APIView):
             openapi.Parameter('tourist', openapi.IN_QUERY, description='tourist email', type=openapi.TYPE_INTEGER),
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             comment = get_object_or_404(Comment, pk=pk)
             serializer = CommentSerializer(comment)
@@ -710,7 +491,7 @@ class CommentAPIView(APIView):
     def post(self, request):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
-            if not IsTourist().has_permission(request, view):
+            if not IsTourist().has_permission(request, self):
                 return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -730,7 +511,7 @@ class CommentAPIView(APIView):
         comment = get_object_or_404(Comment, pk=pk)
         serializer = CommentSerializer(comment, data=request.data)
         if serializer.is_valid():
-            if not IsTourist().has_permission(request, view, comment):
+            if not IsTourist().has_permission(request, self, comment):
                 return Response(status=status.HTTP_403_FORBIDDEN)
             serializer.save()
             return Response(serializer.data)
@@ -750,7 +531,7 @@ class CommentAPIView(APIView):
     def delete(self, request, pk):
         comment = get_object_or_404(Comment, pk=pk)
         if not (IsCentralEmployee().has_permission(request, self) or 
-                IsTourist().has_permission(request, view, comment)):
+                IsTourist().has_permission(request, self, comment)):
             return Response(status=status.HTTP_403_FORBIDDEN)
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -803,7 +584,7 @@ class PointOfInterestAPIView(APIView):
 
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             point_of_interest = get_object_or_404(PointOfInterest, pk=pk)
             serializer = PointOfInterestSerializer(point_of_interest)
@@ -901,10 +682,10 @@ class PointOfInterest_TransportationAPIView(APIView):
 
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
-            serializer = PointOfInterest_TransportationSerializer(poi_transportation)
+            serializer = PointOfInterestTransportationSerializer(poi_transportation)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         queryset = self.get_queryset()
@@ -922,7 +703,7 @@ class PointOfInterest_TransportationAPIView(APIView):
         ],
         request_body=PointOfInterestTransportationSerializer)
     def post(self, request):
-        serializer = PointOfInterest_TransportationSerializer(
+        serializer = PointOfInterestTransportationSerializer(
             data=request.data)
         if serializer.is_valid():
             point_of_interest = serializer.validated_data.get('point_of_interest')
@@ -949,7 +730,7 @@ class PointOfInterest_TransportationAPIView(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
-        serializer = PointOfInterest_TransportationSerializer(
+        serializer = PointOfInterestTransportationSerializer(
             poi_transportation, data=request.data)
         if serializer.is_valid():
             point_of_interest = serializer.validated_data.get('point_of_interest')
@@ -987,106 +768,6 @@ class PointOfInterest_TransportationAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# OpeningHoursAPIView
-
-class OpeningHoursAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    def get_queryset(self):
-        queryset = OpeningHours.objects.all()
-        point_of_interest = self.request.query_params.get('point_of_interest')
-
-        if point_of_interest:
-            queryset = queryset.filter(point_of_interest=point_of_interest)
-
-        return queryset
-    
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-            ),
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
-
-        ]
-    )
-    def get(self, request, pk=None):
-        if pk is not None:
-            opening_hours = get_object_or_404(OpeningHours, pk=pk)
-            serializer = OpeningHoursSerializer(opening_hours)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        queryset = self.get_queryset()
-        serializer = OpeningHoursSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=OpeningHoursSerializer)
-    def post(self, request):
-        serializer = OpeningHoursSerializer(data=request.data)
-        if serializer.is_valid():
-            point_of_interest = serializer.validated_data.get('point_of_interest')
-            city = point_of_interest.city
-            if not (IsCentralEmployee().has_permission(request, self) or
-                    IsRegionalEmployee().has_permission(request, self, city)):
-                return Response(status=status.HTTP_403_FORBIDDEN)
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-        request_body=OpeningHoursSerializer)
-    def put(self, request, pk):
-        opening_hours = get_object_or_404(OpeningHours, pk=pk)
-        serializer = OpeningHoursSerializer(opening_hours, data=request.data)
-        if serializer.is_valid():
-            point_of_interest = serializer.validated_data.get('point_of_interest')
-            city = point_of_interest.city
-            if not (IsCentralEmployee().has_permission(request, self) or
-                    IsRegionalEmployee().has_permission(request, self, city)):
-                return Response(status=status.HTTP_403_FORBIDDEN)
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @swagger_auto_schema(
-        manual_parameters=[
-                openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                )
-        ],
-    )
-    def delete(self, request, pk):
-        opening_hours = get_object_or_404(OpeningHours, pk=pk)
-        point_of_interest = opening_hours.point_of_interest
-        city = point_of_interest.city
-        if not (IsCentralEmployee().has_permission(request, self) or
-                IsRegionalEmployee().has_permission(request, self, city)):
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        opening_hours.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 # PhotoAPIView
 
 class PhotoAPIView(APIView):
@@ -1109,10 +790,9 @@ class PhotoAPIView(APIView):
                     type=openapi.TYPE_STRING
             ),
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
-
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             photo = get_object_or_404(Photo, pk=pk)
             serializer = PhotoSerializer(photo)
@@ -1229,7 +909,7 @@ class VideoAPIView(APIView):
 
         ]
     )
-    def get(self, request, pk=None):
+    def get(self, pk=None):
         if pk is not None:
             video = get_object_or_404(Video, pk=pk)
             serializer = VideoSerializer(video)

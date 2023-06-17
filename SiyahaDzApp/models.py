@@ -1,16 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-class Region(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    
-    def __str__(self):
-        return self.name
         
 class RegionalEmployee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='regionalemployee', primary_key=True)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    region = models.CharField(max_length=100)
 
     def __str__(self):
         return self.user.username
@@ -29,17 +23,6 @@ class Tourist(models.Model):
         return self.user.username
     
     
-class Category(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    def __str__(self):
-        return self.name
-
-class Theme(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    
-    def __str__(self):
-        return self.name
-    
 class Transportation(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     
@@ -48,8 +31,8 @@ class Transportation(models.Model):
 
 class PointOfInterest(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    category = models.CharField(max_length=100)
+    theme = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     commune = models.CharField(max_length=100)
     latitude = models.FloatField()
@@ -62,22 +45,27 @@ class PointOfInterest(models.Model):
     def __str__(self):
         return self.name
 
+
 class Event(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
     description = models.TextField()
     opendate = models.DateField()
     closedate = models.DateField()
-    image = models.ImageField(upload_to="storage/photos/photoevent")
+    image = models.ImageField(upload_to="storage/photoevent/")
     
     def __str__(self):
         return self.name
 
+
 class Comment(models.Model):
+    RATING_CHOICES = [1,2,3 ,4,5]
+
     id = models.CharField(max_length=255, primary_key=True)
     tourist = models.ForeignKey(Tourist, on_delete=models.CASCADE)
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
     comment = models.TextField()
+    rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
         return f"{self.tourist.username} - {self.point_of_interest.name}"
@@ -86,19 +74,6 @@ class Comment(models.Model):
         self.id = f"{self.tourist.username}-{self.point_of_interest.name}"
         super().save(*args, **kwargs)
 
-class OpeningHours(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
-    day_of_week = models.CharField(max_length=20)
-    opening_time = models.TimeField()
-    closing_time = models.TimeField()
-
-    def __str__(self):
-        return f"{self.point_of_interest.name} - {self.day_of_week}"
-
-    def save(self, *args, **kwargs):
-        self.id = f"{self.point_of_interest.name}-{self.day_of_week}"
-        super().save(*args, **kwargs)
 
 class PointOfInterest_Transportation(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
@@ -111,11 +86,12 @@ class PointOfInterest_Transportation(models.Model):
     def save(self, *args, **kwargs):
         self.id = f"{self.point_of_interest.name}-{self.transportation.name}"
         super().save(*args, **kwargs)
+
     
 class Photo(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='storage/photos/point_of_interest')
+    image = models.ImageField(upload_to='storage/point_of_interest/photos')
 
     def __str__(self):
         return self.image.name
@@ -128,7 +104,7 @@ class Photo(models.Model):
 class Video(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     point_of_interest = models.ForeignKey(PointOfInterest, on_delete=models.CASCADE)
-    video = models.FileField(upload_to='storage/videos/')
+    video = models.FileField(upload_to='storage/point_of_interest/videos')
 
     def __str__(self):
         return self.video.name
