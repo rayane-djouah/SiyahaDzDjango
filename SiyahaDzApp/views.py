@@ -459,12 +459,6 @@ class CommentAPIView(APIView):
         return queryset
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-                ),
             openapi.Parameter('tourist', openapi.IN_QUERY, description='tourist email', type=openapi.TYPE_INTEGER),
         ]
     )

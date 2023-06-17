@@ -59,7 +59,13 @@ class Event(models.Model):
 
 
 class Comment(models.Model):
-    RATING_CHOICES = [1,2,3 ,4,5]
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
 
     id = models.CharField(max_length=255, primary_key=True)
     tourist = models.ForeignKey(Tourist, on_delete=models.CASCADE)
