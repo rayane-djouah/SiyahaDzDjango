@@ -302,10 +302,10 @@ class EventAPIView(APIView):
     
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest name', type=openapi.TYPE_STRING),
         ]
     )
-    def get(self,request,pk):
+    def get(self,request,pk=None):
         if pk is not None:
             event = get_object_or_404(Event, pk=pk)
             serializer = EventSerializer(event)
@@ -462,18 +462,18 @@ class CommentAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         queryset = Comment.objects.all()
-        tourist = self.request.query_params.get('tourist')
+        point = self.request.query_params.get('point-of-interest')
 
-        if tourist:
-            queryset = queryset.filter(tourist=tourist)
+        if point:
+            queryset = queryset.filter(point_of_interest=point)
 
         return queryset
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('tourist', openapi.IN_QUERY, description='tourist email', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point name', type=openapi.TYPE_STRING),
         ]
     )
-    def get(self,request,pk):
+    def get(self,request,pk=None):
         if pk is not None:
             comment = get_object_or_404(Comment, pk=pk)
             serializer = CommentSerializer(comment)
@@ -577,9 +577,9 @@ class PointOfInterestAPIView(APIView):
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('search', openapi.IN_QUERY, description='search', type=openapi.TYPE_STRING),
-            openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_INTEGER),
-            openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_INTEGER),
-            openapi.Parameter('city', openapi.IN_QUERY, description='city', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_STRING),
+            openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_STRING),
+            openapi.Parameter('city', openapi.IN_QUERY, description='city', type=openapi.TYPE_STRING),
 
         ]
     )
@@ -671,10 +671,10 @@ class PointOfInterest_TransportationAPIView(APIView):
         return queryset
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
-    def get(self,request,pk):
+    def get(self,request,pk=None):
         if pk is not None:
             poi_transportation = get_object_or_404(PointOfInterest_Transportation, pk=pk)
             serializer = PointOfInterestTransportationSerializer(poi_transportation)
@@ -775,10 +775,10 @@ class PhotoAPIView(APIView):
     
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
-    def get(self,request,pk):
+    def get(self,request,pk=None):
         if pk is not None:
             photo = get_object_or_404(Photo, pk=pk)
             serializer = PhotoSerializer(photo)
@@ -799,7 +799,7 @@ class PhotoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'image': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'image']
@@ -829,7 +829,7 @@ class PhotoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'image': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'image']
@@ -885,7 +885,7 @@ class VideoAPIView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
     def get(self,request,pk):
@@ -909,7 +909,7 @@ class VideoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'video': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'video']
@@ -939,7 +939,7 @@ class VideoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'video': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'video']

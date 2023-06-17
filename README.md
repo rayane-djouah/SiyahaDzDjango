@@ -43,6 +43,7 @@ DB_PORT=your-database-port
 
 python manage.py migrate
 
+#To populate the database, run the script of the "generate database.py" file and run the python   command :   python manage.py loaddata data.json
 ```
 
 5. Start the development server:
@@ -82,3 +83,6 @@ Contributions to the SiyahaDZ API are welcome! If you find a bug, have a feature
 ## License
 
 This project is licensed under the MIT License.
+
+
+

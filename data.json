@@ -1,0 +1,2624 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "user1",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user1",
+            "first_name": "first_name1",
+            "last_name": "last_name1",
+            "email": "user1@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.centralemployee",
+        "pk": 1,
+        "fields": {
+            "user": 1
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "user2",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user2",
+            "first_name": "first_name2",
+            "last_name": "last_name2",
+            "email": "user2@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.regionalemployee",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "region": "Alger"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "password": "user3",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user3",
+            "first_name": "first_name3",
+            "last_name": "last_name3",
+            "email": "user3@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.regionalemployee",
+        "pk": 3,
+        "fields": {
+            "user": 3,
+            "region": "Oran"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 4,
+        "fields": {
+            "password": "user4",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user4",
+            "first_name": "first_name4",
+            "last_name": "last_name4",
+            "email": "user4@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.regionalemployee",
+        "pk": 4,
+        "fields": {
+            "user": 4,
+            "region": "Jijel"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 5,
+        "fields": {
+            "password": "user5",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user5",
+            "first_name": "first_name5",
+            "last_name": "last_name5",
+            "email": "user5@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.tourist",
+        "pk": 5,
+        "fields": {
+            "user": 5
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 6,
+        "fields": {
+            "password": "user6",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user6",
+            "first_name": "first_name6",
+            "last_name": "last_name6",
+            "email": "user6@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.tourist",
+        "pk": 6,
+        "fields": {
+            "user": 6
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 7,
+        "fields": {
+            "password": "user7",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user7",
+            "first_name": "first_name7",
+            "last_name": "last_name7",
+            "email": "user7@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.tourist",
+        "pk": 7,
+        "fields": {
+            "user": 7
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 8,
+        "fields": {
+            "password": "user8",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user8",
+            "first_name": "first_name8",
+            "last_name": "last_name8",
+            "email": "user8@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.tourist",
+        "pk": 8,
+        "fields": {
+            "user": 8
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 9,
+        "fields": {
+            "password": "user9",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user9",
+            "first_name": "first_name9",
+            "last_name": "last_name9",
+            "email": "user9@esi.dz",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "SiyahaDzApp.tourist",
+        "pk": 9,
+        "fields": {
+            "user": 9
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "metro",
+        "fields": {
+            "name": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "tram",
+        "fields": {
+            "name": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "train",
+        "fields": {
+            "name": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.transportation",
+        "pk": "taxi",
+        "fields": {
+            "name": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Makam Chahid",
+        "fields": {
+            "name": "Makam Chahid",
+            "category": "Monument",
+            "theme": "m\u00e9moire et patriotisme",
+            "city": "Alger",
+            "commune": " Belouizdad",
+            "latitude": 36.7525,
+            "longitude": 3.042,
+            "description": "Le Makam Chahid est un monument embl\u00e9matique d'Alger, rendant hommage aux martyrs de la guerre de lib\u00e9ration. Il se compose d'une imposante structure en forme de flamme offrant une vue panoramique.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "La Corniche",
+        "fields": {
+            "name": "La Corniche",
+            "category": "Zone de loisirs",
+            "theme": "la promenade et des loisirs en bord de mer",
+            "city": "Oran",
+            "commune": "zouhour",
+            "latitude": 35.6997,
+            "longitude": -0.6308,
+            "description": "La Corniche est une promenade c\u00f4ti\u00e8re anim\u00e9e offrant une vue magnifique sur la mer M\u00e9diterran\u00e9e. Elle abrite des restaurants, des caf\u00e9s et des boutiques, et est id\u00e9ale pour se promener et profiter de l'atmosph\u00e8re maritime.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest",
+        "pk": "Plage de Sidi Abdelaziz",
+        "fields": {
+            "name": "Plage de Sidi Abdelaziz",
+            "category": "Plage",
+            "theme": "la d\u00e9tente et des activit\u00e9s baln\u00e9aires",
+            "city": "Jijel",
+            "commune": "Sidi Abdelaziz",
+            "latitude": 36.8237,
+            "longitude": 5.7506,
+            "description": "La plage de Sidi Abdelaziz est une magnifique plage de sable situ\u00e9e \u00e0 Jijel. Elle offre des eaux cristallines et une belle \u00e9tendue de sable dor\u00e9, propice \u00e0 la d\u00e9tente et aux activit\u00e9s baln\u00e9aires. C'est un lieu pris\u00e9 des visiteurs pour son paysage pittoresque et son ambiance paisible.",
+            "views_count": 0,
+            "openhour": "08:00:00",
+            "closehour": "18:00:00"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-metro",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-metro",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-metro",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "metro"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-tram",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-tram",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-tram",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "tram"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-train",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-train",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-train",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "train"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Makam Chahid-taxi",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "La Corniche-taxi",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.pointofinterest_transportation",
+        "pk": "Plage de Sidi Abdelaziz-taxi",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "transportation": "taxi"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+        "fields": {
+            "name": "C\u00e9r\u00e9monie de comm\u00e9moration des martyrs",
+            "point_of_interest": "Makam Chahid",
+            "description": "Une c\u00e9r\u00e9monie solennelle pour rendre hommage aux martyrs de la guerre de lib\u00e9ration nationale",
+            "opendate": "2023-07-05",
+            "closedate": "2023-07-05",
+            "image": "storage/photoevent/event1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Festival de la Corniche",
+        "fields": {
+            "name": "Festival de la Corniche",
+            "point_of_interest": "La Corniche",
+            "description": "Festival de la Corniche",
+            "opendate": "2023-08-15",
+            "closedate": "2023-08-20",
+            "image": "storage/photoevent/event2.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.event",
+        "pk": "Concours de sports nautiques",
+        "fields": {
+            "name": "Concours de sports nautiques",
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "description": "Un concours passionnant de sports nautiques, y compris le surf, la planche \u00e0 voile et la natation, sur la magnifique plage de Sidi Abdelaziz",
+            "opendate": "2023-07-10",
+            "closedate": "2023-07-10",
+            "image": "storage/photoevent/event3.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Makam Chahid-point0.jpg",
+        "fields": {
+            "point_of_interest": "Makam Chahid",
+            "image": "storage/point_of_interest/photos/point0.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "La Corniche-point1.jpg",
+        "fields": {
+            "point_of_interest": "La Corniche",
+            "image": "storage/point_of_interest/photos/point1.jpg"
+        }
+    },
+    {
+        "model": "SiyahaDzApp.photo",
+        "pk": "Plage de Sidi Abdelaziz-point2.jpg",
+        "fields": {
+            "point_of_interest": "Plage de Sidi Abdelaziz",
+            "image": "storage/point_of_interest/photos/point2.jpg"
+        }
+    }
+]

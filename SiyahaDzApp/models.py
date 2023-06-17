@@ -39,8 +39,8 @@ class PointOfInterest(models.Model):
     longitude = models.FloatField()
     description = models.TextField()
     views_count = models.IntegerField(default=0)
-    openhour = models.TimeField
-    closehour = models.TimeField
+    openhour = models.TimeField(default=None)
+    closehour = models.TimeField(default=None)
     
     def __str__(self):
         return self.name

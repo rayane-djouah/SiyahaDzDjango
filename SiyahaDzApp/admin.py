@@ -20,7 +20,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ['name', 'point_of_interest', 'opendate', 'closedate']
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['tourist', 'point_of_interest', 'comment']
+    list_display = ['pk','tourist', 'point_of_interest', 'comment']
 
 
 class PointOfInterestAdmin(admin.ModelAdmin):
@@ -34,10 +34,10 @@ class PointOfInterest_TransportationAdmin(admin.ModelAdmin):
     list_display = ['point_of_interest', 'transportation']
 
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ['point_of_interest', 'image']
+    list_display = ['id','point_of_interest', 'image']
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ['point_of_interest', 'video']
+    list_display = ['pk','point_of_interest', 'video']
 
 admin.site.register(RegionalEmployee, RegionalEmployeeAdmin)
 admin.site.register(CentralEmployee, CentralEmployeeAdmin)
