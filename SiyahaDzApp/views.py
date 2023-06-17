@@ -577,9 +577,9 @@ class PointOfInterestAPIView(APIView):
     @swagger_auto_schema(
         manual_parameters=[
             openapi.Parameter('search', openapi.IN_QUERY, description='search', type=openapi.TYPE_STRING),
-            openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_INTEGER),
-            openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_INTEGER),
-            openapi.Parameter('city', openapi.IN_QUERY, description='city', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('category', openapi.IN_QUERY, description='category', type=openapi.TYPE_STRING),
+            openapi.Parameter('theme', openapi.IN_QUERY, description='theme', type=openapi.TYPE_STRING),
+            openapi.Parameter('city', openapi.IN_QUERY, description='city', type=openapi.TYPE_STRING),
 
         ]
     )
@@ -671,7 +671,7 @@ class PointOfInterest_TransportationAPIView(APIView):
         return queryset
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
     def get(self,request,pk):
@@ -775,7 +775,7 @@ class PhotoAPIView(APIView):
     
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
     def get(self,request,pk):
@@ -799,7 +799,7 @@ class PhotoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'image': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'image']
@@ -829,7 +829,7 @@ class PhotoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'image': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'image']
@@ -885,7 +885,7 @@ class VideoAPIView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
+            openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_STRING),
         ]
     )
     def get(self,request,pk):
@@ -909,7 +909,7 @@ class VideoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'video': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'video']
@@ -939,7 +939,7 @@ class VideoAPIView(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'point_of_interest': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'point_of_interest': openapi.Schema(type=openapi.TYPE_STRING),
                 'video': openapi.Schema(type=openapi.TYPE_FILE)
             },
             required=['point_of_interest', 'video']
