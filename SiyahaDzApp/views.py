@@ -671,14 +671,7 @@ class PointOfInterest_TransportationAPIView(APIView):
         return queryset
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-            ),
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
-
         ]
     )
     def get(self,request,pk):
@@ -782,12 +775,6 @@ class PhotoAPIView(APIView):
     
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-            ),
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
         ]
     )
@@ -898,14 +885,7 @@ class VideoAPIView(APIView):
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(
-                    'Authorization',
-                    openapi.IN_HEADER,
-                    description='Bearer Token',
-                    type=openapi.TYPE_STRING
-            ),
             openapi.Parameter('point_of_interest', openapi.IN_QUERY, description='point_of_interest_name', type=openapi.TYPE_INTEGER),
-
         ]
     )
     def get(self,request,pk):
