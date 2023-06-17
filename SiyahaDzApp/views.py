@@ -136,7 +136,9 @@ class RegionalEmployeeAPIView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]   
     def get(self,request,pk):
         if pk is not None:
-            regional_employee = get_object_or_404(RegionalEmployee, pk=pk)
+            user = User.objects.filter(email=pk)
+            id = user[0].id
+            regional_employee = get_object_or_404(RegionalEmployee, pk=id)
             serializer = RegionalEmployeeSerializer(regional_employee)
             return Response(serializer.data, status=status.HTTP_200_OK)
         regional_employees = RegionalEmployee.objects.all()
@@ -201,6 +203,13 @@ class RegionalEmployeeAPIView(APIView):
         regional_employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class UserAPIView(APIView):
+    def get(self,request,pk):
+        if pk is not None:
+            user = get_object_or_404(User, pk=pk)
+            return Response(user.email, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 # TouristAPIView
 
@@ -209,7 +218,9 @@ class TouristAPIView(APIView):
 
     def get(self,request,pk):
         if pk is not None:
-            tourist = get_object_or_404(Tourist, pk=pk)
+            user = User.objects.filter(email=pk)
+            id = user[0].id
+            tourist = get_object_or_404(Tourist, pk=id)
             serializer = TouristSerializer(tourist)
             return Response(serializer.data, status=status.HTTP_200_OK)
         tourists = Tourist.objects.all()

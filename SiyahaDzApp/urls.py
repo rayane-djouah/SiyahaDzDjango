@@ -26,6 +26,7 @@ urlpatterns = [
     path('regional-employees/<str:pk>/', RegionalEmployeeAPIView.as_view(), name='regional-employee-detail'),
     path('tourists/', TouristAPIView.as_view(), name='tourists'),
     path('tourists/<str:pk>/', TouristAPIView.as_view(), name='tourist-detail'),
+    path('users/<int:pk>/', UserAPIView().as_view(), name='user-email'),
     path('comments/', CommentAPIView.as_view(), name='comments'),
     path('comments/<str:pk>/', CommentAPIView.as_view(), name='comment-detail'),
     path('points-of-interest/', PointOfInterestAPIView.as_view(), name='points-of-interest'),
